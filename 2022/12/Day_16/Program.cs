@@ -42,16 +42,50 @@ namespace Day16
                     possibleValves.Add(aValve.Name);
                 }
             };
-            RunValves("AA", "AA", possibleValves, 30, 0);
 
-            Console.WriteLine(maxFlow);
-
-            using (StreamWriter writer = new StreamWriter("..\\..\\Resources\\Result.txt",append:true))
+            int agentCount = 2; //count of agent to work on this project
+            if (agentCount == 2)
             {
-                writer.WriteLine(maxFlow);
-                writer.WriteLine(bestPath);
-            }
+                //divide possibleValves to 1 or 2 count arraylist.
+                int agentAValveCount;
+                System.Collections.ArrayList agentApossibleValves = new System.Collections.ArrayList();
+                for (agentAValveCount=1; agentAValveCount < possibleValves.Count; agentAValveCount++)
+                {
+                    
+                    for (int i = 1; i <= agentAValveCount; i++)
+                    {
+                        string x = "";
+                        for (int j = 0; j < possibleValves.Count; j++) 
+                        {
+                            string y = (string)possibleValves[j];
+                        }
+                        x = x + y;
+                    }
+                    agentApossibleValves.Add(x);
 
+
+                }
+                RunValves("AA", "AA", possibleValves, 30, 0);
+
+
+
+
+
+
+
+
+
+            }
+            else { 
+                RunValves("AA", "AA", possibleValves, 30, 0);
+                Console.WriteLine(maxFlow);
+                using (StreamWriter writer = new StreamWriter("..\\..\\Resources\\Result.txt",append:true))
+                {
+                    writer.WriteLine(maxFlow);
+                    writer.WriteLine(bestPath);
+                }
+            }
+            
             Console.WriteLine("the end");
 
         }
