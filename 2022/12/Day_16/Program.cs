@@ -46,7 +46,7 @@ namespace Day16
 
             Console.WriteLine(maxFlow);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\berk.kilinc\\Desktop\\Result.txt",append:true))
+            using (StreamWriter writer = new StreamWriter("..\\..\\Resources\\Result.txt",append:true))
             {
                 writer.WriteLine(maxFlow);
                 writer.WriteLine(bestPath);
@@ -133,7 +133,7 @@ namespace Day16
         private static void GetValveData()
         {
             valveData = new Dictionary<string, Valve>();
-            string fileText = File.ReadAllText("C:\\Users\\berk.kilinc\\Desktop\\Data.txt");
+            string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
             var valveDataText = fileText.Split('\n').Select(line => line.Split(';'));
             foreach (var valve in valveDataText)
             {
