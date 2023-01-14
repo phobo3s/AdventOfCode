@@ -51,18 +51,20 @@ namespace Day16
                 System.Collections.ArrayList agentApossibleValves = new System.Collections.ArrayList();
                 for (agentAValveCount=1; agentAValveCount < possibleValves.Count; agentAValveCount++)
                 {
-                    
-                    for (int i = 1; i <= agentAValveCount; i++)
+                    string x = "";
+                    string y = "";
+                    for (int q = 0; q < possibleValves.Count; q++) 
                     {
-                        string x = "";
-                        for (int j = 0; j < possibleValves.Count; j++) 
+                        for (int i = 1; i <= agentAValveCount; i++)
                         {
-                            string y = (string)possibleValves[j];
+                            for (int j = 0; j < possibleValves.Count; j++) 
+                            {
+                                y = (string)possibleValves[j];
+                            }
+                            x = x + y;
                         }
-                        x = x + y;
+                        agentApossibleValves.Add(x);
                     }
-                    agentApossibleValves.Add(x);
-
 
                 }
                 RunValves("AA", "AA", possibleValves, 30, 0);

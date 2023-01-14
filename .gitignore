@@ -1,4 +1,5 @@
+*.suo
 *.user
-bin
+binz
 obj
 packages
