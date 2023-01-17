@@ -48,32 +48,22 @@ namespace Day16
             {
                 //divide possibleValves to 1 or 2 count arraylist.
                 System.Collections.ArrayList agentApossibleValves = new System.Collections.ArrayList();
-                for (int agentAValveCount=1; agentAValveCount < (possibleValves.Count/2)+1; agentAValveCount++)
-                {
-                        string x = "";
-                        for (int j = 0; j < possibleValves.Count; j++) 
-                        {
-                        x = "";
-                            for (int i = 1; i <= agentAValveCount; i++)
-                                {
-                                    string y = (string)possibleValves[j];
-                                    x = x + y;
-                                }
-                        agentApossibleValves.Add(x);    
-                        }
-                }
-                 
+                  
+                /*
+                MakeComb "", "abcd", 3
 
+                Function MakeComb(aPath As String, ByVal P As String, desiredLen As Integer) As String
+                    If Len(aPath) = desiredLen Then
+                        combResult.Add aPath
+                    Else
+                        Dim i As Integer
+                        For i = 1 To Len(P)
+                            MakeComb = MakeComb(aPath & Mid(P, i, 1), Mid(P, i + 1), desiredLen) 'Replace(P, Mid(P, i, 1), ""), desiredLen)
+                        Next i
+                    End If
+                end function
+                */
                 
-
-
-
-
-
-
-
-
-
             }
             else { 
                 RunValves("AA", "AA", possibleValves, 30, 0);
@@ -88,6 +78,12 @@ namespace Day16
             Console.WriteLine("the end");
 
         }
+
+        private static void DivideValves()
+        {
+
+        }
+
 
         private static void RunValves(string xName, string tracePath, System.Collections.ArrayList possibleValves, int timeleft, int sumFlow) 
         {
