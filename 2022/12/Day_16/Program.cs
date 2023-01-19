@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Day16
         private static Dictionary<string, Valve> valveData;
         private static Dictionary<string,string> allPaths;
         private static Dictionary<string, string> shortestPaths;
+        private static ArrayList agentAPossibleValves = new ArrayList();
         private static int maxFlow;
         private static string bestPath;
         static void Main(string[] args)
@@ -34,7 +36,7 @@ namespace Day16
                 .ToArray();
 
 
-            System.Collections.ArrayList possibleValves = new System.Collections.ArrayList();
+            ArrayList possibleValves = new ArrayList();
             foreach (Valve aValve in valveData.Values)
             {
                 if(aValve.FlowRate != 0)
@@ -47,23 +49,37 @@ namespace Day16
             if (agentCount == 2)
             {
                 //divide possibleValves to 1 or 2 count arraylist.
-                System.Collections.ArrayList agentApossibleValves = new System.Collections.ArrayList();
-                  
-                /*
-                MakeComb "", "abcd", 3
-
-                Function MakeComb(aPath As String, ByVal P As String, desiredLen As Integer) As String
-                    If Len(aPath) = desiredLen Then
-                        combResult.Add aPath
-                    Else
-                        Dim i As Integer
-                        For i = 1 To Len(P)
-                            MakeComb = MakeComb(aPath & Mid(P, i, 1), Mid(P, i + 1), desiredLen) 'Replace(P, Mid(P, i, 1), ""), desiredLen)
-                        Next i
-                    End If
-                end function
-                */
-                
+                //DivideValves AgentApossiblevalves
+                int doubleAgentMaxFlow = 0;
+                string doubleAgentBestPath = "";
+                for (int i = 1; i < (possibleValves.Count/2); i++) { 
+                    DivideValves(new ArrayList(),possibleValves,3);
+                    int agentAMaxFlow;
+                    string agentABestPath;
+                    foreach( ArrayList agentAPath in agentAPossibleValves){
+                        RunValves("AA", "AA", agentAPath, 26, 0);
+                        agentAMaxFlow = maxFlow;
+                        maxFlow = 0;
+                        agentABestPath = bestPath;
+                        bestPath = "";
+                        foreach(string x in agentAPath) {possibleValves.Remove(x);};
+                        RunValves("AA", "AA", possibleValves, 26, 0);
+                        if ((agentAMaxFlow + maxFlow) > doubleAgentMaxFlow)
+                        {
+                            doubleAgentMaxFlow = agentAMaxFlow + maxFlow;
+                            doubleAgentBestPath = agentABestPath + " || " + bestPath;
+                        }                 
+                        maxFlow = 0;
+                        bestPath = "";
+                        foreach(string x in agentAPath) {possibleValves.Add(x);};
+                    }
+                }
+                using (StreamWriter writer = new StreamWriter("..\\..\\Resources\\Result.txt",append:true))
+                {
+                        writer.WriteLine(doubleAgentMaxFlow);
+                        writer.WriteLine(doubleAgentBestPath);
+                }
+             
             }
             else { 
                 RunValves("AA", "AA", possibleValves, 30, 0);
@@ -79,13 +95,25 @@ namespace Day16
 
         }
 
-        private static void DivideValves()
+        private static void DivideValves(ArrayList aPath, ArrayList P , int desiredLen)
         {
-
+            if(aPath.Count == desiredLen)
+            {
+                agentAPossibleValves.Add(aPath);
+            }
+            else
+            {
+                for(int i = 0; i < P.Count; i++){
+                    ArrayList aPathNew = new ArrayList();
+                    aPathNew = (ArrayList)aPath.Clone();
+                    aPathNew.Add(P[i]);
+                    DivideValves(aPathNew, P.GetRange(i+1,P.Count-i-1), desiredLen);
+                }
+            }
         }
 
 
-        private static void RunValves(string xName, string tracePath, System.Collections.ArrayList possibleValves, int timeleft, int sumFlow) 
+        private static void RunValves(string xName, string tracePath, ArrayList possibleValves, int timeleft, int sumFlow) 
         {
             if (timeleft <= 0 | tracePath.ToCharArray().Count(c => c == '!') == possibleValves.Count)
             {
