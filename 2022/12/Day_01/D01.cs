@@ -6,28 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Day16
+namespace Day01
 {
     class Program
     {
        
         static void Main(string[] args)
         {
-            GetValveData();
-            
-        }
-
-        
-        private static void GetValveData()
-        {
-            Dictionary<string, string>  valveData = new Dictionary<string, string>();
             string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
-            var valveDataText = fileText.Split('\n').Select(line => line.Split(';'));
-            foreach (var valve in valveDataText)
+            string[] DataText = fileText.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
+            int maxLoad = 0;
+            foreach (string aDwarf in DataText)
             {
-               
+                int totalLoad = 0;
+                foreach (string aLoad in aDwarf.Split(new string[] { "\r\n" }, StringSplitOptions.None))
+                {
+                    totalLoad = totalLoad + int.Parse(aLoad);
+                }
+                if (totalLoad > maxLoad)
+                {
+                    maxLoad = totalLoad;
+                }
             };
+            Console.WriteLine(maxLoad);
         }
-
     }
 }
