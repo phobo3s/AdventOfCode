@@ -53,7 +53,7 @@ namespace Day16
                 int doubleAgentMaxFlow = 0;
                 string doubleAgentBestPath = "";
                 for (int i = 1; i < (possibleValves.Count/2); i++) { 
-                    DivideValves(new ArrayList(),possibleValves,3);
+                    DivideValves(new ArrayList(),possibleValves,i);
                     int agentAMaxFlow;
                     string agentABestPath;
                     foreach( ArrayList agentAPath in agentAPossibleValves){
