@@ -4,12 +4,10 @@
     "\\2022",
     "\\2022\\12",
     "\\2022\\12\\Day_01",
-    "\\2022\\12\\Day_01\\bin",
     "\\2022\\12\\Day_01\\bin\\Debug",
     "\\2022\\12\\Day_01\\bin\\Release",
-    "\\2022\\12\\Day_01\\Resources",
-    "\\2022\\12\\Day_16"
+    "\\2022\\12\\Day_01\\Resources"
   ],
-  "SelectedNode": "\\2022\\12\\Day_01\\Program.cs",
+  "SelectedNode": "\\2022\\12\\Day_01\\D01.cs",
   "PreviewInSolutionExplorer": false
 }
