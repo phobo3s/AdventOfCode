@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
@@ -15,7 +14,7 @@ namespace Day01
         {
             string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
             string[] DataText = fileText.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None);
-            int maxLoad = 0;
+            List<int> totalSnack = new List<int>();
             foreach (string aDwarf in DataText)
             {
                 int totalLoad = 0;
@@ -23,12 +22,21 @@ namespace Day01
                 {
                     totalLoad = totalLoad + int.Parse(aLoad);
                 }
-                if (totalLoad > maxLoad)
-                {
-                    maxLoad = totalLoad;
-                }
+                totalSnack.Add(totalLoad);
             };
-            Console.WriteLine(maxLoad);
+            for(int i=0; i < totalSnack.Count -2 ; i++)
+            {
+                for(int j = i+1; j < totalSnack.Count -0 ; j++)
+                {
+                    if (totalSnack[i] < totalSnack[j] )
+                    {
+                        int temp = totalSnack[j];
+                        totalSnack[j] = totalSnack[i];
+                        totalSnack[i] = temp;
+                    }
+                }
+            }
+            Console.WriteLine(totalSnack[0]+totalSnack[1]+totalSnack[2]);
         }
     }
 }
