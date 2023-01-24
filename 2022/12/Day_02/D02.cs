@@ -23,29 +23,27 @@ namespace Day_02
                 string[] playerChoices = aGame.Split(' ');
                 int player1Choice = (int)Enum.Parse(typeof(player1), playerChoices[0]);
                 int player2Choice = (int)Enum.Parse(typeof(player2), playerChoices[1]);
-
-
-                    if ((Math.Abs(player1Choice-player2Choice) % 2) == 0) //is the difference is even
+                if ((Math.Abs(player1Choice-player2Choice) % 2) == 0) //is the difference is even
+                {
+                    if (player2Choice == player1Choice)
                     {
-                        if (player2Choice == player1Choice)
-                        {
-                            totalPoint = totalPoint + 3;
-                        }
-                        else
-                        {
-                            if (player2Choice == Math.Min(player1Choice,player2Choice))
-                            {
-                                totalPoint = totalPoint + 6;
-                            }
-                        }
-                    }else //or odd    
+                        totalPoint = totalPoint + 3;
+                    }
+                    else
                     {
-                        if (player2Choice == Math.Max(player1Choice,player2Choice))
+                        if (player2Choice == Math.Min(player1Choice,player2Choice))
                         {
                             totalPoint = totalPoint + 6;
                         }
                     }
-                    totalPoint = totalPoint + player2Choice;
+                }else //or odd    
+                {
+                    if (player2Choice == Math.Max(player1Choice,player2Choice))
+                    {
+                        totalPoint = totalPoint + 6;
+                    }
+                }
+                totalPoint = totalPoint + player2Choice;
             }
         }
     }
