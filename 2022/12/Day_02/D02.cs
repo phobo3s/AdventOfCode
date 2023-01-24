@@ -9,8 +9,8 @@ namespace Day_02
 {
     class Program
     {
-        private enum player1 {A=3,B=2,C=1};
-        private enum player2 {X=3,Y=2,Z=1};
+        private enum player1 {A=1,B=2,C=3};
+        private enum player2 {X=1,Y=2,Z=3};
         static void Main(string[] args)
         {
             string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
@@ -27,15 +27,15 @@ namespace Day_02
 
                     if ((Math.Abs(player1Choice-player2Choice) % 2) == 0) //is the difference is even
                     {
-                        if (player2Choice == Math.Min(player1Choice,player2Choice))
+                        if (player2Choice == player1Choice)
                         {
-                            totalPoint = totalPoint + 6;
+                            totalPoint = totalPoint + 3;
                         }
                         else
                         {
-                            if (player2Choice == player1Choice)
+                            if (player2Choice == Math.Min(player1Choice,player2Choice))
                             {
-                                totalPoint = totalPoint + 3;
+                                totalPoint = totalPoint + 6;
                             }
                         }
                     }else //or odd    
