@@ -16,8 +16,19 @@ namespace Day_02
             string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
             string[] gameData = fileText.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             int totalPoint = 0;
-            
-            //resolve
+
+            //resolve Part-2
+            foreach (string aGame in gameData)
+            {
+                string[] playerChoices = aGame.Split(' ');
+                int player1Choice = (int)Enum.Parse(typeof(player1), playerChoices[0]);
+                int player2Choice = (int)Enum.Parse(typeof(player2), playerChoices[1]);
+                totalPoint = totalPoint + ((player1Choice+player2Choice)%3)+1+((player2Choice-1)*3);
+            }
+            Console.WriteLine(totalPoint);
+            totalPoint = 0;
+
+            //resolve Part-1
             foreach (string aGame in gameData)
             {
                 string[] playerChoices = aGame.Split(' ');
@@ -45,6 +56,8 @@ namespace Day_02
                 }
                 totalPoint = totalPoint + player2Choice;
             }
+            Console.WriteLine(totalPoint);
+
         }
     }
 }
