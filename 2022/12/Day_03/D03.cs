@@ -14,14 +14,17 @@ namespace Day_03
             string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
             string[] sackData = fileText.Split(new string[] { "\r\n" }, StringSplitOptions.None);
             //resolve Part-2
-            for (int i=0, i < sackData.Length, i = i+3)
+            int badgePoint = 0;
+            for (int i=0; i < sackData.Length; i=i+3)
             {
-
+                foreach (char anItem in sackData[i].ToHashSet())
+                {
+                    if (sackData[i+1].ToHashSet().Contains(anItem) && sackData[i+2].ToHashSet().Contains(anItem))
+                    {
+                        badgePoint = badgePoint + ((anItem-38)%58);
+                    }
+                }
             }
-
-
-
-
 
             //resolve Part-1
             int totalError = 0;
@@ -46,7 +49,6 @@ namespace Day_03
 
             }
             Console.WriteLine("the end");
-
 
         }
     }
