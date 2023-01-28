@@ -16,27 +16,35 @@ namespace Day_03
         {
             string fileText = File.ReadAllText("..\\..\\Resources\\ProblemData.txt");
             qAll = new Queue<char>();
-            qRunner = new Queue<char>();
+            
             foreach (char c in fileText) 
             {
                 qAll.Enqueue(c);
             }
+            
+            //resolve Part-2
+            qRunner = new Queue<char>();
+            for (int i = 1; i < 15; i++)
+            {
+                qRunner.Enqueue(qAll.Dequeue());
+            }
+            NoSameInQueue(14);
+            int result = fileText.Length - qAll.Count();
+
+            //resolve Part-1
+            qRunner = new Queue<char>();
             for (int i = 1; i < 5; i++)
             {
                 qRunner.Enqueue(qAll.Dequeue());
             }
-            //resolve Part-2
-            
-
-            //resolve Part-1
-            NoSameInQueue();
-
+            NoSameInQueue(4);
+            result = fileText.Length - qAll.Count();
 
             Console.WriteLine("the end");
 
         }
     
-        static void NoSameInQueue()
+        static void NoSameInQueue(int codeLen)
         {
             if(qRunner.Count == 1)
             {
@@ -47,13 +55,13 @@ namespace Day_03
                 char subjectVal = qRunner.Dequeue();
                 if (qRunner.Contains(subjectVal))
                 {
-                    Enumerable.Range(0, 4-qRunner.Count()).ToList().ForEach(arg => qRunner.Enqueue(qAll.Dequeue()));
+                    Enumerable.Range(0, codeLen-qRunner.Count()).ToList().ForEach(arg => qRunner.Enqueue(qAll.Dequeue()));
                 }
                 else
                 {
 
                 }
-                NoSameInQueue();
+                NoSameInQueue(codeLen);
             }
         }
     }
